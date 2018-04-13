@@ -6,12 +6,33 @@ Add your answers inline, below, with your pull request.
 
 1. List all of the main states a process may be in at any point in time on a
    standard Unix system. Briefly explain what each of these states mean.
+      - The main states a process may be in at any point in time on a standard Unix 
+        system are created, ready, running, blocked, and terminated. The created state 
+        begins once a process is created; proccesses remain in the created state until 
+        they move to the ready state. The ready or waiting process indicates that the 
+        process has been loaded onto main memory and is waiting to be executed. When a 
+        process is selected for execution, it moves to the running state. Processes may 
+        be stopped temporarily if they are placed in the blocked state. Finally, a process
+        is said to be in the terminated state when it has either terminated execution or 
+        been deliberately killed.
 
 2. What is a Zombie Process? How does it get created? How does it get destroyed?
+      - A zombie process is a process that has finished executing and is in a terminated
+        state that is still in the process table. They are created when a child process 
+        executes and is terminated before it's parent process, but the exit status is needed
+        in order for the parent process to run. Once the wait() function is called from the 
+        parent process, the zombie's entry is removed from the process table and is thus 
+        destroyed.
 
 3. Describe the job of the Scheduler in the OS in general.
+      - The Scheduler selects processes from the queue and loads them into system memory
+        so that they can be executed.
 
 4. Describe the benefits of the MLFQ over a plain Round-Robin scheduler.
+      - The Multi-Level Feedback Queue allows input/output bound processes to run more 
+        frequently which minimizes response time. When using Round-Robin scheduling, highly
+        interactive processes aren't scheduled any more frequently than processes that are
+        bound to the CPU.
 
 ## Programming Exercise: The Lambda School Shell (`lssh`)
 
