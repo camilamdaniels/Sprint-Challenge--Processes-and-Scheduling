@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #define PROMPT "lambda-shell$ "
 
@@ -90,32 +92,38 @@ int main(void)
             break;
         }
 
+        if (strcmp(args[0], "cd\n") == 0) {
+            char *dir = strtok(args[1], " ");
+            dir = strtok(NULL, " ");
+            if (chdir(args[1]) == -1) {
+                perror("chdir");
+            } else if (chdir(args[1]) == 0) {
+                continue;
+            }
+        }
+        
+        
+        /* Add your code for implementing the shell's logic here */
+    
+        if (fork() == 0) {
+            execvp(args[0], &args[0]);
+            break;
+        } else {
+            wait(NULL);
+        }
+
         #if DEBUG
 
         // Some debugging output
 
         // Print out the parsed command line in args[]
-        for (int i = 0; args[i] != NULL; i++) {
-            printf("%d: '%s'\n", i, args[i]);
-        }
-
+        // for (int i = 0; args[i] != NULL; i++) {
+        //     printf("%d: '%s'\n", i, args[i]);
+        // }
         
-        
-        /* Add your code for implementing the shell's logic here */
-        if (strcmp(args[0], "cd\n") == 0) {
-            
-            char *dir = strtok(args[1], " ");
-            dir = strtok(NULL, " ");
-            if (chdir(dir) == -1) {
-                perror("chdir");
-            }
-        }
-        execvp(args[0], args);
 
         #endif
-        if (strcmp(args[0], "exit\n") == 0) {
-            exit(0);
-        } 
+        
     }
 
     return 0;
