@@ -103,38 +103,19 @@ int main(void)
         
         /* Add your code for implementing the shell's logic here */
         if (strcmp(args[0], "cd\n") == 0) {
-            // if (args_count != 2) {
-            //     continue;
-            // }
             
             char *dir = strtok(args[1], " ");
             dir = strtok(NULL, " ");
             if (chdir(dir) == -1) {
                 perror("chdir");
             }
-
-
-            // if (chdir(args[1]) == 0) {
-            //     char *getcd = NULL;
-            //     getcwd(getcd, 128);
-            // }
-            chdir(args[0]);
-
         }
         execvp(args[0], args);
-        // if (strcmp(args[0], "ls") == 0) {
-        //     char *argv[] = {"ls", "-l", 0};
-        //     execvp(argv[0], argv);
-        // } else if (strcmp(args[0], "head") == 0) {
 
-        // }
         #endif
-        if (strcmp(args[0], "exit") == 0) {
+        if (strcmp(args[0], "exit\n") == 0) {
             exit(0);
-        } else {
-            continue;
-        }
-
+        } 
     }
 
     return 0;
