@@ -92,21 +92,18 @@ int main(void)
             break;
         }
 
-        if (strcmp(args[0], "cd\n") == 0) {
-            char *dir = strtok(args[1], " ");
-            dir = strtok(NULL, " ");
+        if (strcmp(args[0], "cd") == 0) {
             if (chdir(args[1]) == -1) {
                 perror("chdir");
-            } else if (chdir(args[1]) == 0) {
                 continue;
-            }
+            } 
         }
         
         
         /* Add your code for implementing the shell's logic here */
     
         if (fork() == 0) {
-            execvp(args[0], &args[0]);
+            execvp(args[0], args);
             break;
         } else {
             wait(NULL);
