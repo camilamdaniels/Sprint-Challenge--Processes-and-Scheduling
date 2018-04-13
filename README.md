@@ -9,7 +9,7 @@ Add your answers inline, below, with your pull request.
       - The main states a process may be in at any point in time on a standard Unix 
         system are created, ready, running, blocked, and terminated. The created state 
         begins once a process is created; proccesses remain in the created state until 
-        they move to the ready state. The ready or waiting process indicates that the 
+        they move to the ready state. The ready or waiting state indicates that the 
         process has been loaded onto main memory and is waiting to be executed. When a 
         process is selected for execution, it moves to the running state. Processes may 
         be stopped temporarily if they are placed in the blocked state. Finally, a process
@@ -19,7 +19,7 @@ Add your answers inline, below, with your pull request.
 2. What is a Zombie Process? How does it get created? How does it get destroyed?
       - A zombie process is a process that has finished executing and is in a terminated
         state that is still in the process table. They are created when a child process 
-        executes and is terminated before it's parent process, but the exit status is needed
+        executes and is terminated before its parent process, but the exit status is needed
         in order for the parent process to run. Once the wait() function is called from the 
         parent process, the zombie's entry is removed from the process table and is thus 
         destroyed.
